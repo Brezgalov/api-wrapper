@@ -160,14 +160,18 @@ class Request
     /**
      * Parse response from resource
      * @param resource $ch
-     * @return array
+     * @return Response
      */
     public function getResponse($ch)
     {
-        return [
-            'data' => curl_exec($ch),
-            'errno' => curl_errno($ch),
-            'error' => curl_error($ch),
-        ];
+        $response = new Response();
+        $response->data = curl_exec($ch);
+        $response->status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $errno = curl_errno($ch);
+        if ($errno > 0) {
+            $msg = curl_strerror($errno);
+            $response->errors[] = "Error {$errno}: $msg";
+        }
+        return $response;
     }
 }

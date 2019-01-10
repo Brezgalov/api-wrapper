@@ -32,14 +32,4 @@ abstract class Client
     {
         return (new Request())->setUrl($this->getBasePath())->setPath($path);
     }
-
-    /**
-     * check if response has any error
-     * @param array $result
-     * @return bool
-     */
-    protected function responseIsValid(array $result)
-    {
-        return empty($result['errno']) && empty($result['error']);
-    }
 }
