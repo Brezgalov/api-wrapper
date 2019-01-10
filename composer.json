@@ -1,0 +1,21 @@
+{
+    "name": "brezgalov/ApiWrapper",
+    "description": "Api connector",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleg Brezgalov",
+            "email": "oleg.brezgalov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "brezgalov\\common\\": "src/"
+        }
+    }
+}
