@@ -142,6 +142,21 @@ class Request
         return $data;
     }
 
+    public function execJson(array $decorators = [])
+    {
+        $response = $this->exec($decorators);
+        if (!empty($response['data'])) {
+            $data = json_decode($response['data'], 1);
+            if (!empty($data)) {
+                $response['data'] = $data;
+            } else {
+                $response['errno'] = 500;
+                $response['error'] = 'Could not parse json!';
+            }
+        }
+        return $response;
+    }
+
     /**
      * Parse response from resource
      * @param resource $ch

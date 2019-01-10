@@ -28,8 +28,18 @@ abstract class Client
      * @param $path
      * @return Request
      */
-    public function prepareRequest($path)
+    protected function prepareRequest($path)
     {
         return (new Request())->setUrl($this->getBasePath())->setPath($path);
+    }
+
+    /**
+     * check if response has any error
+     * @param array $result
+     * @return bool
+     */
+    protected function responseIsValid(array $result)
+    {
+        return empty($result['errno']) && empty($result['error']);
     }
 }
