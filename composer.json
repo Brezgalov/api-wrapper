@@ -1,6 +1,6 @@
 {
-    "name": "brezgalov/ApiWrapper",
-    "description": "Api connector",
+    "name": "brezgalov/api-wrapper",
+    "description": "Api client base classes",
     "type": "library",
     "license": "MIT",
     "authors": [
