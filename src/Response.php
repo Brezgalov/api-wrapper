@@ -12,6 +12,6 @@ class Response
 
     public function isValid()
     {
-        return empty($this->httpErrno) && empty($this->errors);
+        return empty($this->errors);
     }
 }
