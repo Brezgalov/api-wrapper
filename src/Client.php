@@ -9,19 +9,20 @@ namespace brezgalov\ApiWrapper;
 abstract class Client
 {
     /**
+     * @var string
+     */
+    protected $token;
+
+    public function __construct($token = null)
+    {
+        $this->token = $token;
+    }
+
+    /**
      * get Api base url
      * @return string
      */
     abstract public function getBasePath();
-
-    /**
-     * Get access token here
-     * @return string
-     */
-    public function getAccessToken()
-    {
-        return null;
-    }
 
     /**
      * prepare request
