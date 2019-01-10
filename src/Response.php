@@ -21,9 +21,9 @@ class Response
 
     /**
      * Server response
-     * @var null
+     * @var array
      */
-    public $data = null;
+    public $data = [];
 
     /**
      * Response has no errors and $status ~ 200?
