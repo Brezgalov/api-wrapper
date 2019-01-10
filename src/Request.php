@@ -126,8 +126,8 @@ class Request
 
     /**
      * Execute request and get response
-     * @param array $decorator - array of IResourceDecorator
-     * @return array
+     * @param array $decorators
+     * @return Response
      */
     public function exec(array $decorators = [])
     {
@@ -142,16 +142,20 @@ class Request
         return $data;
     }
 
+    /**
+     * Execute request and parse json response
+     * @param array $decorators
+     * @return Response
+     */
     public function execJson(array $decorators = [])
     {
         $response = $this->exec($decorators);
-        if (!empty($response['data'])) {
-            $data = json_decode($response['data'], 1);
+        if ($response->data && empty($response->errors)) {
+            $data = json_decode($response->data, 1);
             if (!empty($data)) {
-                $response['data'] = $data;
+                $response->data = $data;
             } else {
-                $response['errno'] = 500;
-                $response['error'] = 'Could not parse json!';
+                $response->errors[] = 'Could not parse json!';
             }
         }
         return $response;
