@@ -9,15 +9,22 @@ namespace brezgalov\ApiWrapper;
 class Client
 {
     /**
-     * @var string
+     * get Api base url
+     * @return string
      */
-    public $baseUrl = '';
+    public function getBasePath()
+    {
+        return '';
+    }
 
     /**
-     * store your token here
-     * @var string
+     * Get access token here
+     * @return string
      */
-    public $token;
+    public function getAccessToken()
+    {
+        return '';
+    }
 
     /**
      * prepare request
@@ -26,6 +33,6 @@ class Client
      */
     public function prepareRequest($path)
     {
-        return (new Request())->setUrl($this->baseUrl)->setPath($path);
+        return (new Request())->setUrl($this->getBasePath())->setPath($path);
     }
 }
