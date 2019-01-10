@@ -26,11 +26,11 @@ class Response
     public $data = null;
 
     /**
-     * Response has no errors and $status == 200?
+     * Response has no errors and $status ~ 200?
      * @return bool
      */
     public function isSuccessful()
     {
-        return empty($this->errors) && $this->status === 200;
+        return empty($this->errors) && $this->status >= 200 && $this->status < 300;
     }
 }
