@@ -18,7 +18,10 @@ abstract class Client
      * Get access token here
      * @return string
      */
-    abstract public function getAccessToken();
+    public function getAccessToken()
+    {
+        return null;
+    }
 
     /**
      * prepare request
