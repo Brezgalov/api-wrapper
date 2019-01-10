@@ -6,25 +6,19 @@ namespace brezgalov\ApiWrapper;
  * Extend this class in order to create api client
  * @package brezgalov\ApiWrapper
  */
-class Client
+abstract class Client
 {
     /**
      * get Api base url
      * @return string
      */
-    public function getBasePath()
-    {
-        return '';
-    }
+    abstract public function getBasePath();
 
     /**
      * Get access token here
      * @return string
      */
-    public function getAccessToken()
-    {
-        return '';
-    }
+    abstract public function getAccessToken();
 
     /**
      * prepare request
