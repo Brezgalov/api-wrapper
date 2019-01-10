@@ -10,7 +10,7 @@ class Response
 
     public $data = null;
 
-    public function isValid()
+    public function isSuccess()
     {
         return empty($this->errors);
     }
