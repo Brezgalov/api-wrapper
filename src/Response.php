@@ -2,16 +2,35 @@
 
 namespace brezgalov\ApiWrapper;
 
+/**
+ * Class contains api response
+ * @package brezgalov\ApiWrapper
+ */
 class Response
 {
+    /**
+     * @var http response status
+     */
     public $status;
 
+    /**
+     * Possible errors
+     * @var array
+     */
     public $errors = [];
 
+    /**
+     * Server response
+     * @var null
+     */
     public $data = null;
 
-    public function isSuccess()
+    /**
+     * Response has no errors and $status == 200?
+     * @return bool
+     */
+    public function isSuccessful()
     {
-        return empty($this->errors);
+        return empty($this->errors) && $this->status === 200;
     }
 }
