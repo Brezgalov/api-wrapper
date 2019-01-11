@@ -42,4 +42,13 @@ class Response
     {
         $this->errors[] = $message;
     }
+
+    /**
+     * Returns all error messages as a single string
+     * @return string
+     */
+    public function getErrorsConcat($separator = '; ')
+    {
+        return implode($separator, $this->errors);
+    }
 }
