@@ -33,4 +33,13 @@ class Response
     {
         return empty($this->errors) && $this->status >= 200 && $this->status < 300;
     }
+
+    /**
+     * Add error message
+     * @param $message
+     */
+    public function addError($message)
+    {
+        $this->errors[] = $message;
+    }
 }
