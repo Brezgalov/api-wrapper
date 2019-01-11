@@ -13,6 +13,10 @@ abstract class Client
      */
     protected $token;
 
+    /**
+     * Client constructor.
+     * @param string $token - default is null
+     */
     public function __construct($token = null)
     {
         $this->token = $token;
