@@ -33,12 +33,27 @@ class Request
     public $bodyParams = [];
 
     /**
+     * @var array of IResourceDecorator
+     */
+    public $decorators = [];
+
+    /**
      * @param $url
      * @return $this
      */
     public function setUrl($url)
     {
         $this->baseUrl = $url;
+        return $this;
+    }
+
+    /**
+     * @param $url
+     * @return $this
+     */
+    public function setDecorators(array $decorators)
+    {
+        $this->decorators = $decorators;
         return $this;
     }
 
@@ -126,13 +141,12 @@ class Request
 
     /**
      * Execute request and get response
-     * @param array $decorators
      * @return Response
      */
-    public function exec(array $decorators = [])
+    public function exec()
     {
         $ch = $this->prepareCurlResourse();
-        foreach ($decorators as $decorator) {
+        foreach ($this->decorators as $decorator) {
             if ($decorator instanceof IResourceDecorator) {
                 $decorator->decorate($ch);
             }

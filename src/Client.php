@@ -14,12 +14,38 @@ abstract class Client
     protected $token;
 
     /**
+     * @var array of IResourceDecorator
+     */
+    protected $requestDecorators = [];
+
+    /**
      * Client constructor.
      * @param string $token - default is null
      */
     public function __construct($token = null)
     {
         $this->token = $token;
+    }
+
+    public function setRequestDecorators(array $decorators = [])
+    {
+        if (empty($decorators)) {
+            $this->requestDecorators = [];
+        } else {
+            foreach ($decorators as $decorator) {
+                $this->addRequestDecorator($decorator);
+            }
+        }
+    }
+
+    /**
+     * Add this decorator to every request
+     * @param IResourceDecorator $decorator
+     */
+    public function addRequestDecorator(IResourceDecorator $decorator)
+    {
+        $this->requestDecorators[] = $decorator;
+        return $this;
     }
 
     /**
@@ -33,8 +59,8 @@ abstract class Client
      * @param $path
      * @return Request
      */
-    protected function prepareRequest($path)
+    public function prepareRequest($path)
     {
-        return (new Request())->setUrl($this->getBasePath())->setPath($path);
+        return (new Request())->setUrl($this->getBasePath())->setPath($path)->setDecorators($this->requestDecorators);
     }
 }
