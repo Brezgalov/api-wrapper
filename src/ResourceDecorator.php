@@ -1,6 +1,6 @@
 <?php
 
-namespace brezgalov\ApiWrapper;
+namespace Brezgalov\ApiWrapper;
 
 abstract class ResourceDecorator implements IResourceDecorator
 {

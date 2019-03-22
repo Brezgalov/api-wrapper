@@ -1,6 +1,6 @@
 <?php
 
-namespace brezgalov\ApiWrapper;
+namespace Brezgalov\ApiWrapper;
 
 /**
  * Use this in order to make any class a decorator instance

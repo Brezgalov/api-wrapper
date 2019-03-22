@@ -1,6 +1,6 @@
 <?php
 
-namespace brezgalov\ApiWrapper;
+namespace Brezgalov\ApiWrapper;
 
 /**
  * Extend this class in order to create api client

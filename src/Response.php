@@ -1,6 +1,6 @@
 <?php
 
-namespace brezgalov\ApiWrapper;
+namespace Brezgalov\ApiWrapper;
 
 /**
  * Class contains api response
