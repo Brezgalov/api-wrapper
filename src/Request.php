@@ -136,6 +136,13 @@ class Request
             }
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        foreach ($this->decorators as $decorator) {
+            if ($decorator instanceof IResourceDecorator) {
+                $decorator->decorate($ch);
+            }
+        }
+
         return $ch;
     }
 
@@ -146,11 +153,6 @@ class Request
     public function exec()
     {
         $ch = $this->prepareCurlResourse();
-        foreach ($this->decorators as $decorator) {
-            if ($decorator instanceof IResourceDecorator) {
-                $decorator->decorate($ch);
-            }
-        }
         $data = $this->getResponse($ch);
         curl_close($ch);
         return $data;
@@ -158,12 +160,11 @@ class Request
 
     /**
      * Execute request and parse json response
-     * @param array $decorators
      * @return Response
      */
-    public function execJson(array $decorators = [])
+    public function execJson()
     {
-        $response = $this->exec($decorators);
+        $response = $this->exec();
         if ($response->data && empty($response->errors)) {
             $data = json_decode($response->data, 1);
             if (!empty($data)) {
@@ -180,7 +181,7 @@ class Request
      * @param resource $ch
      * @return Response
      */
-    public function getResponse($ch)
+    public function getResponse(&$ch)
     {
         $response = new Response();
         $response->data = curl_exec($ch);
