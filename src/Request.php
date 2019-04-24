@@ -38,6 +38,11 @@ class Request
     public $decorators = [];
 
     /**
+     * @var string|null
+     */
+    protected $responseClass = null;
+
+    /**
      * @return string
      */
     protected function getDefaultResponseClass()
@@ -53,6 +58,28 @@ class Request
     {
         $this->baseUrl = $url;
         return $this;
+    }
+
+    /**
+     * @param $className
+     * @return $this
+     */
+    public function setResponseClass($className)
+    {
+        $this->responseClass = $className;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponseClass()
+    {
+        if ($this->responseClass && class_exists($this->responseClass)) {
+            return $this->responseClass;
+        }
+
+        return $this->getDefaultResponseClass();
     }
 
     /**
@@ -191,7 +218,7 @@ class Request
      */
     public function getResponse(&$ch)
     {
-        $responseClass = $this->getDefaultResponseClass();
+        $responseClass = $this->getResponseClass();
         $response = new $responseClass();
         $response->data = curl_exec($ch);
         $response->status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
