@@ -37,6 +37,9 @@ class Request
      */
     public $decorators = [];
 
+    /**
+     * @return string
+     */
     protected function getDefaultResponseClass()
     {
         return '\Brezgalov\ApiWrapper\Response';
