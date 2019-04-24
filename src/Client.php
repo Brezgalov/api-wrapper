@@ -19,6 +19,11 @@ abstract class Client
     protected $requestDecorators = [];
 
     /**
+     * @var string
+     */
+    protected $requestClass = 'Brezgalov\ApiWrapper\Request';
+
+    /**
      * Client constructor.
      * @param string $token - default is null
      */
@@ -61,6 +66,11 @@ abstract class Client
      */
     public function prepareRequest($path)
     {
-        return (new Request())->setUrl($this->getBasePath())->setPath($path)->setDecorators($this->requestDecorators);
+        $requestClass = $this->requestClass;
+        return (new $requestClass())
+            ->setUrl($this->getBasePath())
+            ->setPath($path)
+            ->setDecorators($this->requestDecorators)
+        ;
     }
 }
