@@ -32,7 +32,7 @@ abstract class Client
      */
     protected function getDefaultRequestClass()
     {
-        return 'Brezgalov\ApiWrapper\Request';
+        return '\Brezgalov\ApiWrapper\Request';
     }
 
     /**

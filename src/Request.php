@@ -37,6 +37,11 @@ class Request
      */
     public $decorators = [];
 
+    protected function getDefaultResponseClass()
+    {
+        return '\Brezgalov\ApiWrapper\Response';
+    }
+
     /**
      * @param $url
      * @return $this
@@ -183,7 +188,8 @@ class Request
      */
     public function getResponse(&$ch)
     {
-        $response = new Response();
+        $responseClass = $this->getDefaultResponseClass();
+        $response = new $responseClass();
         $response->data = curl_exec($ch);
         $response->status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $errno = curl_errno($ch);
