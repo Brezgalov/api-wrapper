@@ -19,11 +19,6 @@ abstract class Client
     protected $requestDecorators = [];
 
     /**
-     * @var string
-     */
-    protected $requestClass = 'Brezgalov\ApiWrapper\Request';
-
-    /**
      * Client constructor.
      * @param string $token - default is null
      */
@@ -32,6 +27,17 @@ abstract class Client
         $this->token = $token;
     }
 
+    /**
+     * @return string
+     */
+    protected function getDefaultRequestClass()
+    {
+        return 'Brezgalov\ApiWrapper\Request';
+    }
+
+    /**
+     * @param array $decorators
+     */
     public function setRequestDecorators(array $decorators = [])
     {
         if (empty($decorators)) {
@@ -46,6 +52,7 @@ abstract class Client
     /**
      * Add this decorator to every request
      * @param IResourceDecorator $decorator
+     * @return $this
      */
     public function addRequestDecorator(IResourceDecorator $decorator)
     {
@@ -62,11 +69,14 @@ abstract class Client
     /**
      * prepare request
      * @param $path
-     * @return Request
+     * @param string|null $requestClass
+     * @return mixed
      */
-    public function prepareRequest($path)
+    public function prepareRequest($path, $requestClass = null)
     {
-        $requestClass = $this->requestClass;
+        if (empty($requestClass)) {
+            $requestClass = $this->getDefaultRequestClass();
+        }
         return (new $requestClass())
             ->setUrl($this->getBasePath())
             ->setPath($path)
