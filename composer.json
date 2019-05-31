@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Brezgalov\\ApiWrapper\\": "src/"
+            "Brezgalov\\ApiWrapper\\": "src/",
+            "Brezgalov\\ApiWrapper\\Decorators\\": "src/decorators"
         }
     }
 }
